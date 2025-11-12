@@ -35,7 +35,10 @@ def predict_news(input_data: UserInput):
             "prediction": result["prediction"],
             "confidence": result["confidence"],
             "probabilities": result["probabilities"],
-            "details": result["extracted_features"]
+            "details": result["extracted_features"],
+            "trust_indicators": result["trust_indicators"],
+            "explainability": result["explainability"],
+            "metadata": result["metadata"]
         }
 
     except Exception as e:
@@ -58,7 +61,8 @@ def get_prediction_history():
         # Format results as list of dicts
         history = []
         for row in rows:
-            history.append({
+            # Handle both old and new schema (for backward compatibility)
+            history_item = {
                 "id": row[0],
                 "statement": row[1],
                 "fullText_based_content": row[2],
@@ -68,8 +72,48 @@ def get_prediction_history():
                 "confidence": row[6],
                 "num_sources": row[7],
                 "has_official_source": bool(row[8])
-            })
+            }
+            # Add new fields if they exist
+            if len(row) > 9:
+                history_item["risk_level"] = row[9]
+                history_item["timestamp"] = row[10]
+                history_item["input_completeness"] = row[11]
+
+            history.append(history_item)
         return {"total_records": len(history), "data": history}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database error: {e}")
+
+
+#Delete a specific prediction by ID (DELETE)
+@app.delete("/history/{prediction_id}")
+def delete_prediction(prediction_id: int):
+    """
+    Delete a specific prediction from the database by its ID.
+    """
+    try:
+        conn = sqlite3.connect(predictor.db_path)
+        cursor = conn.cursor()
+
+        # Check if the prediction exists
+        cursor.execute("SELECT id FROM predictions WHERE id = ?", (prediction_id,))
+        result = cursor.fetchone()
+
+        if not result:
+            conn.close()
+            raise HTTPException(status_code=404, detail=f"Prediction with ID {prediction_id} not found")
+
+        # Delete the prediction
+        cursor.execute("DELETE FROM predictions WHERE id = ?", (prediction_id,))
+        conn.commit()
+        conn.close()
+
+        return {"message": f"Prediction with ID {prediction_id} deleted successfully"}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Database error: {e}")
+
+
