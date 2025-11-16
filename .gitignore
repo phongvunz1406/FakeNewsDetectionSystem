@@ -1,1 +1,113 @@
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+
+# Database - Only ignore runtime database
+prediction.db
+
+# Machine Learning Models - LARGE FILES (use Git LFS or external storage)
+models/RF_model.joblib          # 168 MB - TOO LARGE for GitHub
+models/XGBoost_model.joblib
+# Allow small models
+!models/speaker_label_encoder.joblib
+!models/tfidf_vectorizer.joblib
+!models/kmeans_model.joblib
+
+# Data Files - LARGE FILES (use Git LFS or external storage)
+data/fake_news_dataset.csv      # 346 MB - TOO LARGE
+data/cleaned_dataset.csv        # 162 MB - TOO LARGE
+data/X_train.csv                # 162 MB - TOO LARGE
+# Allow smaller files
+!data/X_test.csv
+!data/X_val.csv
+!data/y_*.csv
+!data/.gitkeep
+!data/README.md
+
+# Jupyter Notebook - ALLOWED (notebooks included in repo)
+# Only ignore checkpoint files, not the notebooks themselves
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+frontend/.env.development
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+coverage/
+*.cover
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# AWS
+.aws/
+*.pem
+*.key
+
+# Docker
+.dockerignore
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# OS
+Thumbs.db
+.DS_Store

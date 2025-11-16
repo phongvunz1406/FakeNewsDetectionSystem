@@ -1,7 +1,7 @@
+import Dashboard from '../components/Dashboard';
+
 export default function Analyze() {
-    return (
-      <>
-        <h1>Hello from Analyze</h1>
-      </>
-    );
+  return (
+    <Dashboard autoRefresh={true} refreshInterval={10000} />
+  );
 }

@@ -1,0 +1,6 @@
+{
+  "statement": "President Obama himself attempted to filibuster Justice Alito, who now sits on the Supreme Court.",
+  "fullText_based_content": "U.S. Supreme Court Justice John Paul Stevens announced his retirement last week, and while President Obama has not yet announced his nominee, U.S. senators are already discussing prospects of a filibuster.\nDemocrats in the Senate hold 59 votes, one short of the 60 needed to bring nominees or legislation to an up or down vote.\nRepublican Sen. Jon Kyl of Arizona said he thought a filibuster was unlikely but he wasn't taking it entirely off the table.\nObama did join a broader Democratic effort to filibuster Alito.\nBut in his own words, he said it was not the best strategy.\nLater that day, an AP report carried the headline, 'Sen. Obama Criticizes Filibuster Tactic.'",
+  "speaker": "Jon Kyl",
+  "sources": "http://abcnews.go.com/ThisWeek/video/supreme-court-vacancy-10344589"
+}
